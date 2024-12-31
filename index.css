@@ -42,15 +42,7 @@ body {
     display: inline-flex;
 }
 
-/* #searchBtn:hover,#resetBtn:hover,#randomBtn:hover{
-    background-color: rgb(238, 165, 55);
-} */
 
-
-/* #namePoke{
-    width: 10%;
-    justify-self: center;
-} */
 
 
 @media (max-width: 350px) {
@@ -60,7 +52,4 @@ body {
         gap: 20px; /* Ajustar el espaciado de card pokemon*/
     }
 
-    /* .cardPokemon {
-        padding: 5%; 
-    } */
 }
