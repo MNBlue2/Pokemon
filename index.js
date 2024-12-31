@@ -1,5 +1,5 @@
-//como no sabemos lo que tarda la respuesta del servidor en devolver los poquemos usamos una funcion asincrona que estas devuelven siempre una promesa, es decir
-//el resultado puede o no puede estar, es decir o es un resultado en una promesa o un error devuelto en una promesa
+//como no sabemos lo que tarda la respuesta del servidor en devolver los pokmons, usamos una funcion asincrona que estas devuelven siempre una promesa, es decir
+// es decir o es un resultado en una promesa o un error devuelto en una promesa
 async function getPokemon(id) {
   try {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -28,37 +28,44 @@ function searchPokemon(id) {
     })
     .catch((error) => {
       console.log("error al recuperar pokemon " + error);
+      alert("Nombre o id de Pokemon no válido")
     });
 }
 
 function printPokemon(data) {
   // Seleccionamos del dom el div con id="resultado" donde queremos mostrar los datos de los pokemon
   const container = document.getElementById("resultado");
-
+  const cardPokemon = document.createElement("cardPoke");
   // Limpiamos cualquier nuestro div por si antes se habia realizado otr busqueda y así dejarlo en blanco antes de añadirle los datos
-  container.innerHTML = '';
+  //container.innerHTML = '';
 
   // Crear un elemento en este caso un H3 con el nombre del Pokeemon
   const namePokemon = document.createElement("h3");
-  namePokemon.textContent = `Nombre: ${data.name}`;
-  container.appendChild(namePokemon);
+  namePokemon.textContent = `${data.name}`;
+  cardPokemon.appendChild(namePokemon);
 
   // Creamos una elemento de imagen para la imagen del Pokemon
   const imagePokemon = document.createElement("img");
   imagePokemon.src = data.sprites.front_default;
-  container.appendChild(imagePokemon);
+  cardPokemon.appendChild(imagePokemon);
 
   // Mostramos la altura y peso del Pokemon
   const measurePokemon = document.createElement("p");
-  measurePokemon.textContent = `Altura: ${data.height / 10} m , Peso: ${data.weight / 10} kg`;
-  container.appendChild(measurePokemon);
+  measurePokemon.innerHTML = `Altura: ${data.height / 10} m<br>Peso: ${data.weight / 10} kg`;
+  cardPokemon.appendChild(measurePokemon);
 
   // Mostrar habilidades del Pokémon, como son varias, con map creamos nuevo array mapeando abilities y tomando el nombre de cada habilidad y con join unidos esos valores en una cadena seprada por comas
   const abilitiesPokemon = document.createElement("p");
-  abilitiesPokemon.textContent = `Habilidades: ${data.abilities
+  abilitiesPokemon.innerHTML = `<br><br>Habilidades:<br><br>${data.abilities
     .map((ability) => ability.ability.name)
-    .join(", ")}`;
-  container.appendChild(abilitiesPokemon);
+    .join("<br>")}`;
+  cardPokemon.appendChild(abilitiesPokemon);
+
+  //añadimos una clase al elemento cardPokemon para poder darle estilos
+  cardPokemon.classList.add("cardPokemon");
+
+  //añadimos ficha del pokemon al contenedor donde se muestran los resultados
+  container.appendChild(cardPokemon);
 }
 
 // Método de inicialización
@@ -69,13 +76,13 @@ function init() {
   const randomBtn = document.getElementById("randomBtn");
   const resultado = document.getElementById("resultado");
 
-  // Limpiamos el resultado anterior
-  resultado.innerHTML = "";
-
   // agregamos los eventos de cada botón
 
   // Agregamos un evento de clic al botón para buscar pokemons
   searchBtn.addEventListener("click", () => {
+    // Limpiamos el resultado anterior
+    resultado.innerHTML = "";
+
     //recuperamos los valores introducimos que luego vamos a buscar
     const namePoke = document.getElementById("namePoke").value;
     //como puede ser uno o varios y sabemos que estan seprarados por comas o un punto o un espacio limpiamos los datos, usamos una expresion regular para esto
@@ -100,6 +107,9 @@ function init() {
 
   // Agregamos evento clic al botón para buscar pokemon de forma aleatoria
   randomBtn.addEventListener("click", () => {
+    // Limpiamos el resultado anterior
+    resultado.innerHTML = "";
+
     const maxId = 898; //el total de pokemos que existen
     const ids = new Set(); // Usamos un Set, es decir un conjunto, para evitar pokemons duplicados
     //queremos 4 pokemons al azar

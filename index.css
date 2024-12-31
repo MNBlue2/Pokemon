@@ -1,0 +1,66 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin-left: 3%;
+}
+
+
+#resultado{
+    display: flex;
+    flex-direction: row;
+    margin-left:2%;
+    margin-top: 2%;
+    width: auto;
+    text-align: center;
+}
+
+.cardPokemon{
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgba(17, 15, 15, 0.363);
+    box-shadow: 10px 10px 14px 2px rgba(0, 0, 0, 0.247);
+    justify-content: center;
+    border-radius: 10px;
+    padding: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
+    width: fit-content;
+}
+
+#resultado > * {
+    margin: 5px; 
+}
+
+#searchBtn, #resetBtn, #randomBtn{
+    border: none; 
+    background-color: rgb(246, 248, 136);
+    /* color: rgb(54, 53, 53);  */
+    padding: 14px 28px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    display: inline-flex;
+}
+
+/* #searchBtn:hover,#resetBtn:hover,#randomBtn:hover{
+    background-color: rgb(238, 165, 55);
+} */
+
+
+/* #namePoke{
+    width: 10%;
+    justify-self: center;
+} */
+
+
+@media (max-width: 350px) {
+    /* Estilos para pantallas de 350px o menos */
+    #resultado {
+        flex-direction: column; /* Cambiar a diplay vertical */
+        gap: 20px; /* Ajustar el espaciado de card pokemon*/
+    }
+
+    /* .cardPokemon {
+        padding: 5%; 
+    } */
+}
